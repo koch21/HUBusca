@@ -1,6 +1,12 @@
 {
   "extends": "expo/tsconfig.base",
   "compilerOptions": {
+    "lib": ["esnext", "dom"],
+    "jsx": "react-native",
+    "checkJs": false,
+    "allowJs": false,
     "strict": true
-  }
+  },
+  "typeRoots": ["node_modules/@types", "./src/types"],
+  "include": ["./src/**/*"]
 }
