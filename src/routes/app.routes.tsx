@@ -7,8 +7,8 @@ const AppStack = createStackNavigator();
 
 const AppRoutes: React.FC = () => {
   return (
-    <AppStack.Navigator headerMode="screen">
-      <AppStack.Screen name="Home" component={Home} />
+    <AppStack.Navigator headerMode="screen" >
+      <AppStack.Screen name="HUBusca" component={Home} />
     </AppStack.Navigator>
   );
 };
