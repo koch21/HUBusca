@@ -8,7 +8,7 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { Animated, Dimensions } from "react-native";
 
-const Header = ({ NumberOfItem, OnChangeText }: { NumberOfItem: string, OnChangeText: any }) => {
+const Header = ({ OnChangeText }: { OnChangeText: any }) => {
 
   // Busca animada
   const animation = new Animated.Value(40);

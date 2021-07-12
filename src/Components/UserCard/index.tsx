@@ -55,7 +55,7 @@ const UserCard = () => {
   return (
     loading ? <ActivityIndicator /> :
       <>
-        <Header NumberOfItem='3' OnChangeText={(text: string) => searchUser(text)} />
+        <Header OnChangeText={(text: string) => searchUser(text)} />
         <FlatList
           data={filteredUser}
           keyExtractor={({ id }) => id.toString()}

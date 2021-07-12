@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
-import { Container, CreateNewPost, TitleTxt, BodyTxt } from './styles';
+import { ActivityIndicator, FlatList } from 'react-native';
+import { Container, FormContainer, CreateNewPost, SubmitButton, TitleTxt, TitleInput, BodyTxt, BodyInput } from './styles';
 import { AntDesign } from "@expo/vector-icons";
 
 import api from '../../Services/api'
@@ -40,11 +40,14 @@ const PostCard = ({ UUID }: { UUID: number }) => {
   }
 
   // Criar Novo Post
-  const createNewPost = async (postId: number) => {
+  const [creating, setCreating] = useState(true)
+  const [title, setTitle] = useState('')
+  const [body, setBody] = useState('')
+  const createANewPost = async (postId: number) => {
     const newpost = {
       userId: postId,
-      title: 'Hello',
-      body: 'World'
+      title: title,
+      body: body
     }
     try {
       const res = await api.post('posts', newpost)
@@ -54,11 +57,12 @@ const PostCard = ({ UUID }: { UUID: number }) => {
     }
   }
 
+
   return (
     loading ? <ActivityIndicator /> :
       <>
-        <CreateNewPost onPress={() => createNewPost(UUID)}><AntDesign name="plus" size={22} color="#f2f2f2" /></CreateNewPost>
-        <FlatList
+        <CreateNewPost onPress={() => setCreating(creating === true ? false : true)}><AntDesign name="plus" size={22} color="#f2f2f2" /></CreateNewPost>
+        {creating ? <FlatList
           data={post}
           keyExtractor={({ id }) => id.toString()}
           renderItem={({ item }) => (
@@ -66,8 +70,21 @@ const PostCard = ({ UUID }: { UUID: number }) => {
               <TitleTxt>{item.title}</TitleTxt>
               <BodyTxt>{item.body}</BodyTxt>
             </Container>
+
           )}
-        />
+        /> : <FormContainer>
+            <TitleInput
+              onChangeText={e => setTitle(e)}
+              value={title}
+              placeholder="Title"
+            />
+            <BodyInput
+              onChangeText={e => setBody(e)}
+              value={body}
+              placeholder="Body"
+            />
+            <SubmitButton onPress={() => { createANewPost(UUID), setTitle(''), setBody('') }}><AntDesign name="arrowright" size={22} color="#f2f2f2" /></SubmitButton>
+          </FormContainer>}
       </>
   )
 }
