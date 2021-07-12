@@ -8,7 +8,7 @@ const App: React.FC = () => {
 
   return (
     <NavigationContainer>
-      <StatusBar style="auto" />
+      <StatusBar style="light" backgroundColor="#242424" />
       <Routes />
     </NavigationContainer>
   );

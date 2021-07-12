@@ -32,6 +32,7 @@ const PostCard = ({ UUID }: { UUID: number }) => {
   const delPost = async (postId: number) => {
     try {
       await api.delete('posts/' + postId)
+      console.log(`the item with id ${postId} has been deleted`)
     } catch (err) {
       console.error(err)
     }
