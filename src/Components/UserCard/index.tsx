@@ -6,7 +6,7 @@ import api from '../../Services/api'
 import PostCard from '../PostCard';
 
 interface User {
-  id: any
+  id: number
   name: string
   email: string
   post: object
@@ -21,7 +21,7 @@ const UserCard = () => {
   const [user, setUser] = useState<User[]>([])
   useEffect(() => {
     try {
-      api.get(`users`).then(
+      api.get('users').then(
         res => setUser(res.data)
       ).finally(() => setLoading(false))
     } catch (err) {
@@ -33,7 +33,7 @@ const UserCard = () => {
     loading ? <ActivityIndicator /> :
       <FlatList
         data={user}
-        keyExtractor={({ id }) => id}
+        keyExtractor={({ id }) => id.toString()}
         renderItem={({ item }) => (
           <Container>
             <NameTxt>{item.name}</NameTxt>
