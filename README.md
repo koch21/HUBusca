@@ -8,7 +8,7 @@ Para remover, basta segurar o card da postagem que você deseja remover.
 
 ### Adicionar
 
-Para adicionar uma postagem, você deve clicar no botão '+' e enviar o título e o corpo no card do usuário que deseja criar a postagem
+Para adicionar uma postagem, você deve clicar no botão '+' e escrever o título e corpo no card do usuário que deseja criar a postagem, em seguida, basta enviar clicando no botão '->'
 
 ### Procurar
 
