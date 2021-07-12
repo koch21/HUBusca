@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList } from 'react-native';
-import { Container, TitleTxt, BodyTxt } from './styles';
+import { ActivityIndicator, FlatList, TouchableOpacity } from 'react-native';
+import { Container, CreateNewPost, TitleTxt, BodyTxt } from './styles';
+import { AntDesign } from "@expo/vector-icons";
 
 import api from '../../Services/api'
 
@@ -39,17 +40,15 @@ const PostCard = ({ UUID }: { UUID: number }) => {
   }
 
   // Criar Novo Post
-  const [createPost, setCreatePost] = useState<Posts>()
-  const newPost = async ({ pID, Ptitle, Pbody }: { pID: number, Ptitle: string, Pbody: string }) => {
-    setCreatePost({
-      'userId': UUID,
-      'id': pID,
-      'title': Ptitle,
-      'body': Pbody,
-    })
+  const createNewPost = async (postId: number) => {
+    const newpost = {
+      userId: postId,
+      title: 'Hello',
+      body: 'World'
+    }
     try {
-      const res = await api.post('posts' + createPost)
-      return res.data
+      const res = await api.post('posts', newpost)
+      console.log(res.data)
     } catch (err) {
       console.error(err)
     }
@@ -57,16 +56,19 @@ const PostCard = ({ UUID }: { UUID: number }) => {
 
   return (
     loading ? <ActivityIndicator /> :
-      <FlatList
-        data={post}
-        keyExtractor={({ id }) => id.toString()}
-        renderItem={({ item }) => (
-          <Container onPress={() => delPost(item.id)}>
-            <TitleTxt>{item.title}</TitleTxt>
-            <BodyTxt>{item.body}</BodyTxt>
-          </Container>
-        )}
-      />
+      <>
+        <CreateNewPost onPress={() => createNewPost(UUID)}><AntDesign name="plus" size={22} color="#f2f2f2" /></CreateNewPost>
+        <FlatList
+          data={post}
+          keyExtractor={({ id }) => id.toString()}
+          renderItem={({ item }) => (
+            <Container onLongPress={() => delPost(item.id)}>
+              <TitleTxt>{item.title}</TitleTxt>
+              <BodyTxt>{item.body}</BodyTxt>
+            </Container>
+          )}
+        />
+      </>
   )
 }
 

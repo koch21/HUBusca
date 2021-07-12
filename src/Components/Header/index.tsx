@@ -1,8 +1,6 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Container,
-  TrashButton,
-  Bold,
   SearchBox,
   SearchButton,
   Input,
@@ -10,15 +8,14 @@ import {
 import { Ionicons } from "@expo/vector-icons";
 import { Animated, Dimensions } from "react-native";
 
-const Header = ({ NumberOfItem, MenuFunction }: { NumberOfItem: string, MenuFunction: object }) => {
-  const [isPress, setIsPress] = useState(true);
+const Header = ({ NumberOfItem, OnChangeText }: { NumberOfItem: string, OnChangeText: any }) => {
 
+  // Busca animada
   const animation = new Animated.Value(40);
   const { width } = Dimensions.get('window');
-
-  function onSearch() {
+  const onSearch = () => {
     Animated.spring(animation, {
-      toValue: width * 0.7,
+      toValue: width * 0.92,
       useNativeDriver: false,
     }).start();
   }
@@ -26,15 +23,11 @@ const Header = ({ NumberOfItem, MenuFunction }: { NumberOfItem: string, MenuFunc
   return (
     <Container>
       <SearchBox style={{ width: animation }}>
-        <Input autoFocus />
-        <SearchButton onPress={onSearch} >
+        <Input autoFocus onChangeText={OnChangeText} />
+        <SearchButton onPress={onSearch}>
           <Ionicons name="search" size={22} color="#f2f2f2" />
         </SearchButton>
       </SearchBox>
-      <TrashButton onPress={() => { isPress === true ? setIsPress(false) : setIsPress(true) }}>
-        <Bold>{NumberOfItem}</Bold>
-        <Ionicons name="ios-trash-outline" size={22} color="#f2f2f2" />
-      </TrashButton>
     </Container>
   );
 };

@@ -9,6 +9,11 @@ export const Container = styled.ScrollView`
   padding: 12px;
   border-radius: 20px;
 `;
+export const CardHeader = styled.View`
+  justify-content: space-between;
+  flex-direction: row;
+  align-items: center;
+`;
 export const NameTxt = styled.Text`
   color: #f2f2f2;
   margin-left: 12px;

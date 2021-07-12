@@ -6,12 +6,9 @@ import Header from '../../Components/Header';
 
 const Home: React.FC = () => {
   return (
-    <>
-      <Header NumberOfItem="3" />
-      <Container >
-        <UserCard />
-      </Container >
-    </>
+    <Container >
+      <UserCard />
+    </Container >
   )
 }
 
